@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: jonssmall.github.iositemap.xml
+
+# Allow all search engines to crawl the site
+# This is appropriate for a political campaign website
+# that wants maximum visibility and discoverability

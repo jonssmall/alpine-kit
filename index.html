@@ -8,22 +8,120 @@
 </head>
 
 <body>
-  <button class="icon-button hamburger-button">
-    <svg width="34" height="34" viewBox="0 0 100 100">
-      <path class="line line1"
-        d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058">
-      </path>
-      <path class="line line2" d="M 20,50 H 80"></path>
-      <path class="line line3"
-        d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942">
-      </path>
-    </svg>
-  </button>
+  <div class="p-8 space-y-4">
+    <h1 class="text-2xl font-bold mb-6">Hamburger Button Color Examples</h1>
+    
+    <!-- Primary Colors -->
+    <div class="space-y-2">
+      <h2 class="text-lg font-semibold">Primary Colors</h2>
+      <div class="flex flex-wrap gap-4">
+        <span class="m-2">
+          <hamburger-button color="blue" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Blue</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="red" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Red</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="green" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Green</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Extended Colors -->
+    <div class="space-y-2">
+      <h2 class="text-lg font-semibold">Extended Colors</h2>
+      <div class="flex flex-wrap gap-4">
+        <span class="m-2">
+          <hamburger-button color="purple" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Purple</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="pink" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Pink</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="indigo" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Indigo</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="yellow" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Yellow</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Nature Colors -->
+    <div class="space-y-2">
+      <h2 class="text-lg font-semibold">Nature Colors</h2>
+      <div class="flex flex-wrap gap-4">
+        <span class="m-2">
+          <hamburger-button color="emerald" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Emerald</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="teal" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Teal</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="cyan" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Cyan</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="orange" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Orange</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Neutral Colors -->
+    <div class="space-y-2">
+      <h2 class="text-lg font-semibold">Neutral Colors</h2>
+      <div class="flex flex-wrap gap-4">
+        <span class="m-2">
+          <hamburger-button color="gray" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Gray</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="slate" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Slate</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Size Examples -->
+    <div class="space-y-2 mt-8">
+      <h2 class="text-lg font-semibold">Size Variations (Green)</h2>
+      <div class="flex flex-wrap gap-4 items-center">
+        <span class="m-2">
+          <hamburger-button color="green" size="sm" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Small</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="green" size="md" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Medium</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="green" size="lg" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Large</span>
+        </span>
+        <span class="m-2">
+          <hamburger-button color="green" size="xl" class="inline-block"></hamburger-button>
+          <span class="ml-2 text-sm">Extra Large</span>
+        </span>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // Add click event to toggle 'opened' class on hamburger button
-    document.querySelector('.hamburger-button').addEventListener('click', function() {
-      this.classList.toggle('opened');
+    // Example of how to listen to the hamburger toggle event
+    document.querySelectorAll('hamburger-button').forEach(button => {
+      button.addEventListener('hamburger-toggle', function(event) {
+        console.log(`${this.getAttribute('color')} menu is now:`, event.detail.isOpen ? 'open' : 'closed');
+        // You can add your mobile menu show/hide logic here
+      });
     });
   </script>
 
