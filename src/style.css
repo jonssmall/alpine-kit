@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.line {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 10;
+  transition: stroke-dasharray .3s ease-out, stroke-dashoffset .4s ease-out
+}
+
+.line1 {
+  stroke-dasharray: 60 207
+}
+
+.line1,
+.line2 {
+  stroke-width: 10
+}
+
+.line2 {
+  stroke-dasharray: 60 60
+}
+
+.line3 {
+  stroke-dasharray: 60 207;
+  stroke-width: 10
+}
+
+.opened .line1 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 10
+}
+
+.opened .line2 {
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: -30;
+  stroke-width: 10
+}
+
+.opened .line3 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 10
+}
+
+
+
+a.button.large,
+button.large {
+  padding: .9375rem
+}
+
+[type=button],
+[type=submit],
+a.button,
+a.button.small,
+a.button:link,
+button,
+button.small {
+  cursor: pointer;
+  padding: .7rem 1.875rem;
+  font-size: 1.125rem;
+  line-height: 1.125;
+  font-weight: 700;
+  color: #fff !important;
+  text-decoration: none;
+  border: 1px solid #004e9c;
+  background-color: #004e9c;
+  margin: 0 .5rem .2rem 0;
+  border-radius: 100px;
+  transition: background-color .15s
+}
+
+[type=button]:hover,
+[type=submit]:hover,
+a.button.small:hover,
+a.button:hover,
+a.button:link:hover,
+button.small:hover,
+button:hover {
+  text-decoration: none;
+  background-color: #1486d8
+}

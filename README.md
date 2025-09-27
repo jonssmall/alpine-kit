@@ -1,0 +1,1 @@
+AlpineJS + Vite + TailwindCSS template gen. Details TBD.
