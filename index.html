@@ -8,66 +8,127 @@
 </head>
 
 <body>
-  <div x-data="mobileMenu()">
-    <!-- Mobile menu with hamburger button -->
-    <div class="flex items-center justify-between p-4 bg-gray-100">
-      <h1 class="text-xl font-bold">My App</h1>
+  <!-- Include the responsive header -->
+  {{> header }}
+
+  <!-- Main content with Alpine.js demo -->
+  <main class="min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
       
-      <!-- Hamburger button that controls Alpine state -->
-      <hamburger-button 
-        x-ref="hamburger"
-        color="blue" 
-        size="md"
-        @hamburger-toggle="handleToggle($event)"
-      ></hamburger-button>
-    </div>
+      <!-- Demo Section -->
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h1 class="text-4xl font-bold text-gray-900 mb-4">
+            Alpine.js + Hamburger Integration Demo
+          </h1>
+          <p class="text-xl text-gray-600">
+            This page demonstrates the integration between Alpine.js and our hamburger button component. 
+            The mobile navigation above uses the hamburger button, while desktop shows a traditional nav bar.
+          </p>
+        </div>
 
-    <!-- Mobile menu that responds to hamburger state -->
-    <nav 
-      class="mobile-nav bg-white shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
-      :class="isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
-      x-show="isMenuOpen"
-      x-transition:enter="transition ease-out duration-200"
-      x-transition:enter-start="opacity-0 scale-95"
-      x-transition:enter-end="opacity-100 scale-100"
-      x-transition:leave="transition ease-in duration-75"
-      x-transition:leave-start="opacity-100 scale-100"
-      x-transition:leave-end="opacity-0 scale-95"
-    >
-      <ul class="py-2">
-        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</a></li>
-        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">About</a></li>
-        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Services</a></li>
-        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Contact</a></li>
-      </ul>
-    </nav>
+        <!-- Alpine.js Demo Component -->
+        <div x-data="mobileMenu()" class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">
+            Programmatic Control Demo
+          </h2>
+          <p class="text-gray-600 mb-6">
+            These buttons demonstrate programmatic control of a hamburger button using Alpine.js methods.
+            Note: This is separate from the main navigation above.
+          </p>
 
-    <!-- Debug info -->
-    <div class="p-4 mt-4 bg-gray-50 rounded">
-      <p class="text-sm text-gray-600">
-        Menu State: <span x-text="isMenuOpen ? 'Open' : 'Closed'" class="font-semibold"></span>
-      </p>
-      <p class="text-sm text-gray-600">
-        Toggle Count: <span x-text="toggleCount" class="font-semibold"></span>
-      </p>
-    </div>
+          <!-- Demo hamburger button -->
+          <div class="flex items-center justify-between p-4 bg-gray-100 rounded-lg mb-6">
+            <h3 class="text-lg font-semibold">Demo Menu</h3>
+            
+            <!-- Demo Hamburger button -->
+            <hamburger-button 
+              x-ref="hamburger"
+              color="blue" 
+              size="md"
+              @hamburger-toggle="handleToggle($event)"
+            ></hamburger-button>
+          </div>
 
-    <!-- Control buttons -->
-    <div class="p-4 space-x-4">
-      <button 
-        @click="openMenu()" 
-        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
-      >
-        Open Menu
-      </button>
-      <button 
-        @click="closeMenu()" 
-        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
-      >
-        Close Menu
-      </button>
+          <!-- Demo menu that responds to hamburger state -->
+          <nav 
+            class="demo-nav bg-blue-50 border border-blue-200 rounded-lg transition-all duration-300 ease-in-out overflow-hidden mb-6"
+            :class="isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
+            x-show="isMenuOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 scale-95"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95"
+          >
+            <ul class="py-4">
+              <li><a href="#" class="block px-6 py-2 text-blue-800 hover:bg-blue-100 transition-colors">Demo Item 1</a></li>
+              <li><a href="#" class="block px-6 py-2 text-blue-800 hover:bg-blue-100 transition-colors">Demo Item 2</a></li>
+              <li><a href="#" class="block px-6 py-2 text-blue-800 hover:bg-blue-100 transition-colors">Demo Item 3</a></li>
+              <li><a href="#" class="block px-6 py-2 text-blue-800 hover:bg-blue-100 transition-colors">Demo Item 4</a></li>
+            </ul>
+          </nav>
+
+          <!-- Debug info -->
+          <div class="p-4 bg-gray-50 rounded-lg mb-6">
+            <h4 class="font-semibold text-gray-900 mb-2">Debug Information</h4>
+            <p class="text-sm text-gray-600">
+              Demo Menu State: <span x-text="isMenuOpen ? 'Open' : 'Closed'" class="font-semibold"></span>
+            </p>
+            <p class="text-sm text-gray-600">
+              Toggle Count: <span x-text="toggleCount" class="font-semibold"></span>
+            </p>
+          </div>
+
+          <!-- Control buttons -->
+          <div class="flex flex-wrap gap-4">
+            <button 
+              @click="openMenu()" 
+              class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            >
+              Open Demo Menu
+            </button>
+            <button 
+              @click="closeMenu()" 
+              class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            >
+              Close Demo Menu
+            </button>
+          </div>
+        </div>
+
+        <!-- Additional Demo Content -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Mobile Navigation</h3>
+            <p class="text-gray-600 mb-4">
+              On mobile screens (below 1024px), the header shows a hamburger button that opens a slide-out menu panel.
+            </p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• Hamburger button with smooth animations</li>
+              <li>• Slide-out menu panel from the right</li>
+              <li>• Backdrop overlay with click-to-close</li>
+              <li>• Auto-close on menu item clicks</li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-4">Desktop Navigation</h3>
+            <p class="text-gray-600 mb-4">
+              On desktop screens (1024px and above), the header shows a traditional horizontal navigation bar.
+            </p>
+            <ul class="text-sm text-gray-500 space-y-1">
+              <li>• Horizontal menu bar</li>
+              <li>• Hover effects on navigation items</li>
+              <li>• GitHub link and action button</li>
+              <li>• Clean, professional layout</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
 
   <script>
     function mobileMenu() {
