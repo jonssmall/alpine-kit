@@ -4,125 +4,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Site</title>
+  <title>Alpine + Hamburger Integration</title>
 </head>
 
 <body>
-  <div class="p-8 space-y-4">
-    <h1 class="text-2xl font-bold mb-6">Hamburger Button Color Examples</h1>
-    
-    <!-- Primary Colors -->
-    <div class="space-y-2">
-      <h2 class="text-lg font-semibold">Primary Colors</h2>
-      <div class="flex flex-wrap gap-4">
-        <span class="m-2">
-          <hamburger-button color="blue" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Blue</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="red" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Red</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="green" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Green</span>
-        </span>
-      </div>
+  <div x-data="mobileMenu()">
+    <!-- Mobile menu with hamburger button -->
+    <div class="flex items-center justify-between p-4 bg-gray-100">
+      <h1 class="text-xl font-bold">My App</h1>
+      
+      <!-- Hamburger button that controls Alpine state -->
+      <hamburger-button 
+        x-ref="hamburger"
+        color="blue" 
+        size="md"
+        @hamburger-toggle="handleToggle($event)"
+      ></hamburger-button>
     </div>
 
-    <!-- Extended Colors -->
-    <div class="space-y-2">
-      <h2 class="text-lg font-semibold">Extended Colors</h2>
-      <div class="flex flex-wrap gap-4">
-        <span class="m-2">
-          <hamburger-button color="purple" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Purple</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="pink" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Pink</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="indigo" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Indigo</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="yellow" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Yellow</span>
-        </span>
-      </div>
+    <!-- Mobile menu that responds to hamburger state -->
+    <nav 
+      class="mobile-nav bg-white shadow-lg transition-all duration-300 ease-in-out overflow-hidden"
+      :class="isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'"
+      x-show="isMenuOpen"
+      x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0 scale-95"
+      x-transition:enter-end="opacity-100 scale-100"
+      x-transition:leave="transition ease-in duration-75"
+      x-transition:leave-start="opacity-100 scale-100"
+      x-transition:leave-end="opacity-0 scale-95"
+    >
+      <ul class="py-2">
+        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</a></li>
+        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">About</a></li>
+        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Services</a></li>
+        <li><a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Debug info -->
+    <div class="p-4 mt-4 bg-gray-50 rounded">
+      <p class="text-sm text-gray-600">
+        Menu State: <span x-text="isMenuOpen ? 'Open' : 'Closed'" class="font-semibold"></span>
+      </p>
+      <p class="text-sm text-gray-600">
+        Toggle Count: <span x-text="toggleCount" class="font-semibold"></span>
+      </p>
     </div>
 
-    <!-- Nature Colors -->
-    <div class="space-y-2">
-      <h2 class="text-lg font-semibold">Nature Colors</h2>
-      <div class="flex flex-wrap gap-4">
-        <span class="m-2">
-          <hamburger-button color="emerald" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Emerald</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="teal" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Teal</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="cyan" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Cyan</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="orange" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Orange</span>
-        </span>
-      </div>
-    </div>
-
-    <!-- Neutral Colors -->
-    <div class="space-y-2">
-      <h2 class="text-lg font-semibold">Neutral Colors</h2>
-      <div class="flex flex-wrap gap-4">
-        <span class="m-2">
-          <hamburger-button color="gray" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Gray</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="slate" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Slate</span>
-        </span>
-      </div>
-    </div>
-
-    <!-- Size Examples -->
-    <div class="space-y-2 mt-8">
-      <h2 class="text-lg font-semibold">Size Variations (Green)</h2>
-      <div class="flex flex-wrap gap-4 items-center">
-        <span class="m-2">
-          <hamburger-button color="green" size="sm" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Small</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="green" size="md" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Medium</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="green" size="lg" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Large</span>
-        </span>
-        <span class="m-2">
-          <hamburger-button color="green" size="xl" class="inline-block"></hamburger-button>
-          <span class="ml-2 text-sm">Extra Large</span>
-        </span>
-      </div>
+    <!-- Control buttons -->
+    <div class="p-4 space-x-4">
+      <button 
+        @click="openMenu()" 
+        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+      >
+        Open Menu
+      </button>
+      <button 
+        @click="closeMenu()" 
+        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+      >
+        Close Menu
+      </button>
     </div>
   </div>
 
   <script>
-    // Example of how to listen to the hamburger toggle event
-    document.querySelectorAll('hamburger-button').forEach(button => {
-      button.addEventListener('hamburger-toggle', function(event) {
-        console.log(`${this.getAttribute('color')} menu is now:`, event.detail.isOpen ? 'open' : 'closed');
-        // You can add your mobile menu show/hide logic here
-      });
-    });
+    function mobileMenu() {
+      return {
+        isMenuOpen: false,
+        toggleCount: 0,
+        
+        init() {
+          console.log('Mobile menu initialized');
+        },
+        
+        handleToggle(event) {
+          console.log('Hamburger toggled:', event.detail);
+          this.isMenuOpen = event.detail.isOpen;
+          this.toggleCount++;
+          
+          // You can add additional logic here
+          if (this.isMenuOpen) {
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+          } else {
+            document.body.style.overflow = '';
+          }
+        },
+        
+        // Programmatically control the hamburger from Alpine
+        openMenu() {
+          console.log('Opening menu...');
+          const hamburger = this.$refs.hamburger;
+          if (hamburger && hamburger.open) {
+            hamburger.open();
+          } else {
+            console.error('Hamburger button not found or no open method');
+          }
+        },
+        
+        closeMenu() {
+          console.log('Closing menu...');
+          const hamburger = this.$refs.hamburger;
+          if (hamburger && hamburger.close) {
+            hamburger.close();
+          } else {
+            console.error('Hamburger button not found or no close method');
+          }
+        }
+      }
+    }
   </script>
 
   <!-- Vite Entry Point -->
